@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# web_stack_debugging_0
+sudo service apache2 start
