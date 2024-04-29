@@ -9,18 +9,17 @@ apt-get install -y haproxy=2.0.\*
 echo "ENABLED=1" > /etc/default/haproxy
 
 echo "
-    listen load_balancer
+frontend lb-frontend
     bind *:80
-    mode http
-    balance roundrobin
     option httpclose
     option forwardfor
-    server 17272-web-01 44.200.83.158:80 check
-    server 17272-web-02 3.237.16.226:80 check
+    default_backend lb-backend
+
+backend lb-backend
+    mode http
+    balance roundrobin
+    server 531172-web-01 100.25.223.113:80 check
+    server 531172-web-02 52.91.183.15:80 check
 " >> /etc/haproxy/haproxy.cfg
 
-if [ "$(pgrep -c haproxy)" -le 0 ]; then
-	service haproxy start
-else
-	service haproxy restart
-fi
+service haproxy start
