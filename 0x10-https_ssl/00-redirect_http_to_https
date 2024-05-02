@@ -1,0 +1,26 @@
+global
+        ssl-dh-param-file /etc/haproxy/dhparams.pem
+
+defaults
+        mode http
+        option httpclose
+        option forwardfor
+        timeout connect 5000ms
+        timeout client 50000ms
+        timeout server 50000ms
+
+frontend http-frontend
+        bind *:80
+        reqadd X-Forwarded-Proto:\ http
+        default_backend lb-backend
+
+frontend https-frontend
+        bind   *:443 ssl crt /etc/haproxy/certs/www.ahmedhesham.tech.pem
+        reqadd X-Forwarded-Proto:\ https
+        default_backend lb-backend
+
+backend lb-backend
+        redirect scheme https code 301 if !{ ssl_fc }
+        balance roundrobin
+        server 531172-web-01 100.25.223.113:80 check
+        server 531172-web-02 52.91.183.15:80 check
