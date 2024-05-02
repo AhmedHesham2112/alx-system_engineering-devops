@@ -3,7 +3,8 @@
 # display information for the specified subdomain
 domain_information () {
     # line=$(dig +short "$2"."$1") it's working but not with the checker
-    line=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')
+    line=$(dig "$2"."$1" |
+    grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')
     echo "$2 $line" |
     awk '{print "The subdomain " $1 " is a " $2 " record and points to " $3}'
 }
