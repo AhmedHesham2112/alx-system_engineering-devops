@@ -16,9 +16,7 @@ if __name__ == "__main__":
         with open("{}.json".format(sys.argv[1]), "w", newline="") as jsonfile:
             todo = []
             for t in todos:
-                todo.append({
-                "task": t.get("title"),
-                "completed": t.get("completed"),
-                "username": user.get("username")
-                })
+                todo.append({"task": t.get("title"),
+                             "completed": t.get("completed"),
+                             "username": user.get("username")})
             json.dump({sys.argv[1]: todo}, jsonfile)
