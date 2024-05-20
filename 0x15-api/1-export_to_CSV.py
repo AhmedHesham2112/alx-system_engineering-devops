@@ -2,9 +2,9 @@
 """for a given employee ID, returns information
 about his/her To-Do list progress.
 extend your Python script to export data in the JSON format."""
+import csv
 import requests
 import sys
-import csv
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
