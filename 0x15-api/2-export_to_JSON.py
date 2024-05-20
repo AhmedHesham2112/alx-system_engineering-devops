@@ -14,9 +14,11 @@ if __name__ == "__main__":
                              params={"userId": sys.argv[1]}).json()
 
         with open("{}.json".format(sys.argv[1]), "w", newline="") as jsonfile:
-            for todo in todos:
-                json.dump({sys.argv[1]: [{
-                    "task": todo.get("title"),
-                    "completed": todo.get("completed"),
-                    "username": user.get("username")
-                }]}, jsonfile)
+            todo = []
+            for t in todos:
+                todo.append({
+                "task": t.get("title"),
+                "completed": t.get("completed"),
+                "username": user.get("username")
+                })
+            json.dump({sys.argv[1]: todo}, jsonfile)
