@@ -17,10 +17,7 @@ def top_ten(subreddit):
     headers = {
         "User-Agent": "script by u/medo_hesham"
     }
-    try:
-        response = requests.get(url, headers=headers, allow_redirects=False)
-        if response.status_code == 200:
-            return response.json()['data']['subscribers']
-        return 0
-    except Exception as e:
-        return 0
+    response = requests.get(url, headers=headers, allow_redirects=False)
+    if response.status_code == 200:
+        return response.json()['data']['subscribers']
+    return 0
